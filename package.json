@@ -1,6 +1,13 @@
 {
   "name": "json-to-react-form-builder",
   "version": "0.1.0",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "files": [ "dist", "README.md" ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OksanaKorobanova/json-to-react-form-builder"
+  },
   "dependencies": {
     "@material-ui/core": "^4.11.0",
     "@material-ui/icons": "^4.9.1",

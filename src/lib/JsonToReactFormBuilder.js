@@ -25,7 +25,7 @@ const JsonToReactFormBuilder = (props) => {
     });
   };
 
-  const loadData = () => JSON.parse(JSON.stringify(props.jsonFile));
+  const loadData = () => props.jsonFile? JSON.parse(JSON.stringify(props.jsonFile)) : [];
   
   useEffect(() => {
     const newObj = loadData();

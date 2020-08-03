@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { fade, makeStyles, withStyles } from '@material-ui/core/styles';
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import {
   FormControl,
   FormLabel,
