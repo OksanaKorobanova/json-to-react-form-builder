@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { CssBaseline, Button } from '@material-ui/core';
-import Components from './components';
+import ComponentBuilder from './ComponentBuilder';
 const useStyles = makeStyles((theme) => ({}));
 
 const JsonToReactFormBuilder = (props) => {
@@ -9,7 +9,6 @@ const JsonToReactFormBuilder = (props) => {
   const [jsonFile, setJsonFile] = useState();
   const [state, setState] = useState();
   const [validation, setValidation] = useState();
-
   // change state
   const handleChangeState = (property, newValue) => {
     setState({
@@ -19,24 +18,31 @@ const JsonToReactFormBuilder = (props) => {
   };
 
   const handleChangeStateEvent = (property) => (event) => {
-    setState({
-      ...state,
-      [property]: event.target.value,
-    });
+    if (state[property] !== event.target.value) {
+      setState({
+        ...state,
+        [property]: event.target.value,
+      });
+    }
   };
-
-  const loadData = () => props.jsonFile? JSON.parse(JSON.stringify(props.jsonFile)) : [];
-  
   useEffect(() => {
-    const newObj = loadData();
+    const newObj = props.jsonFile
+      ? JSON.parse(JSON.stringify(props.jsonFile))
+      : '';
     if (newObj) {
       setJsonFile(newObj);
-      let tempState = {};
-      newObj.map((block) => (tempState[block.attributes.name] = block.content[0].value));
-      setState(tempState);
-      setValidation(tempState);
+      if (props.state) {
+        setState(props.state)
+      } else {
+        let tempState = {};
+        newObj.map(
+          (block) => (tempState[block.attributes.name] = block.content[0].value)
+        );
+        setState(tempState);
+        setValidation(tempState);
+      }
     }
-  }, []);
+  }, [props.jsonFile]);
 
   useEffect(() => {
     console.log('state changed!');
@@ -56,7 +62,7 @@ const JsonToReactFormBuilder = (props) => {
           ? jsonFile.map((block, index) => {
               return (
                 <div key={index}>
-                  {Components(
+                  {ComponentBuilder(
                     block,
                     state,
                     handleChangeState,

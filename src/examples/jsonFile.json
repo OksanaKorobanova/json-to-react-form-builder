@@ -1,0 +1,40 @@
+[
+	{
+		"component": "radio-group",
+		"attributes": {
+			"required": true,
+			"className": "blabla",
+			"title": "Choose domain",
+			"name": "domain"
+		},
+		"content": [
+			{
+				"title": "Host on <organization>.prototypes.markroid.com/<offering>",
+				"subtitle": "Your prototype address page will be: <orgname>.prototypes.markroid.com/<offering>",
+				"value": "INTERNAL"
+			},
+			{
+				"title": "Host it yourself",
+				"value": "EXTERNAL"
+			}
+		]
+	},
+	{
+		"component": "list",
+		"attributes": {
+			"className": "blabla",
+			"required": true,
+			"title": "Choose Template",
+			"name": "template"
+		},
+		"content": [
+			{
+				"value": "id1",
+				"title": "First template",
+				"subtitle": "First template subtitle",
+				"img": "",
+				"description": "First template description"
+			}
+		]
+	}
+]

@@ -1,6 +1,6 @@
 import React from 'react';
-import RadioGroupBlock from './components/RadioGroupBlock';
-import ComponentsList from './components/ComponentsList';
+import RadioGroupBlock from './blockTypes/RadioGroupBlock';
+import ComponentsList from './blockTypes/ComponentsList';
 
 const Components = {
   'radio-group': RadioGroupBlock,

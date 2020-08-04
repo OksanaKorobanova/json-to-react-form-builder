@@ -1,0 +1,18 @@
+{
+  "presets": [
+    [
+      "react-app",
+      {
+        "absoluteRuntime": false
+      }
+    ]
+  ],
+  "plugins": [
+    [
+      "babel-plugin-direct-import",
+      {
+        "modules": "@material-ui/core"
+      }
+    ]
+  ]
+}
