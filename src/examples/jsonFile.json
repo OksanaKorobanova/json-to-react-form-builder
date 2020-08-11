@@ -3,9 +3,11 @@
 		"component": "radio-group",
 		"attributes": {
 			"required": true,
-			"className": "blabla",
 			"title": "Choose domain",
-			"name": "domain"
+			"name": "domain",
+			"xs": 12,
+			"md": 12,
+			"oder": 0
 		},
 		"content": [
 			{
@@ -22,18 +24,69 @@
 	{
 		"component": "list",
 		"attributes": {
-			"className": "blabla",
 			"required": true,
 			"title": "Choose Template",
-			"name": "template"
+			"name": "template",
+			"xs": 12,
+			"md": 12,
+			"oder": 0
 		},
 		"content": [
 			{
 				"value": "id1",
 				"title": "First template",
 				"subtitle": "First template subtitle",
-				"img": "",
+				"img": "https://cdn.lyrathemes.com/amour1.jpg",
 				"description": "First template description"
+			},
+			{
+				"value": "id2",
+				"title": "Second template",
+				"subtitle": "Second template subtitle",
+				"img": "https://cdn.lyrathemes.com/amour1.jpg",
+				"description": "Second template description"
+			},
+			{
+				"value": "id3",
+				"title": "Third template",
+				"subtitle": "Third template subtitle",
+				"img": "https://cdn.lyrathemes.com/amour1.jpg",
+				"description": "Third template description"
+			}
+		]
+	},
+	{
+		"component": "select",
+		"attributes": {
+			"required": true,		
+			"title": "Select color scheme",
+			"name": "colorScheme",
+			"xs": 12,
+			"md": 12,
+			"oder": 0
+		},
+		"content": [
+			{
+				"value": "default"
+			},
+			{
+				"value": "dark"
+			}
+		]
+	},
+	{
+		"component": "button",
+		"attributes": {
+			"required": true,		
+			"title": "Select color scheme",
+			"name": "colorScheme",
+			"xs": 12,
+			"md": 12,
+			"oder": 0
+		},
+		"content": [
+			{
+				"value": "default"
 			}
 		]
 	}

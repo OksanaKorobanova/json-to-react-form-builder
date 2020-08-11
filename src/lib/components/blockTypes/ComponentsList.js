@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   FormControl,
@@ -13,6 +13,7 @@ import {
   CardContent,
   Grid,
 } from '@material-ui/core';
+import { MainContext } from '../context/MainContext';
 
 const useStyles = makeStyles((theme) => ({
   infoBlock: {
@@ -65,21 +66,21 @@ const useStyles = makeStyles((theme) => ({
   card: {
     textAlign: 'center',
   },
+  formLabelRoot: {
+    textTransform: 'capitalize',
+  },
 }));
 
 const ComponentsList = (props) => {
   const classes = useStyles();
+  const { block } = props;
   const {
-    block,
-    property,
     handleChangeState,
     state,
     handleChangeStateEvent,
-  } = props;
-
-  // useEffect(() => {
-  //   handleChangeState(property, block.content[0].value);
-  // }, []);
+    configStyles,
+    configGrid,
+  } = useContext(MainContext);
 
   const CustomTemplate = (props) => {
     return (
@@ -87,12 +88,12 @@ const ComponentsList = (props) => {
         <Card className={classes.card}>
           <CardActionArea
             onClick={(property, newValue) =>
-              handleChangeState(property, props.item.id)
+              handleChangeState(block.attributes.name, props.item.id)
             }>
             <CardMedia
               component='img'
               alt={props.item.title}
-              height='140'
+              height='250'
               image={props.item.img}
               title={props.item.title}
             />
@@ -111,16 +112,26 @@ const ComponentsList = (props) => {
   };
 
   return (
-    <React.Fragment>
+    <Grid
+      item={true}
+      xs={block.attributes.xs ? block.attributes.xs : 12}
+      md={block.attributes.md ? block.attributes.md : 12}
+      style={
+        block.attributes.order
+          ? { order: block.attributes.order }
+          : { order: 'inherit' }
+      }>
       <FormControl
         variant='outlined'
         component='fieldset'
         className={classes.domainRadioGroup}>
-        <FormLabel component='legend'>{block.attributes.title}</FormLabel>
+        <FormLabel component='legend' className={classes.formLabelRoot}>
+          {block.attributes.title}
+        </FormLabel>
         <RadioGroup
           name='commercialType'
           className={classes.radioGroup}
-          value={state[property]}>
+          value={state[block.attributes.name]}>
           <Grid container className={classes.customTemplate}>
             {block.content.map((item, index) => {
               return (
@@ -130,7 +141,7 @@ const ComponentsList = (props) => {
                     value={item.value}
                     control={
                       <Radio
-                        onClick={handleChangeStateEvent(property)}
+                        onClick={handleChangeStateEvent(block.attributes.name)}
                         color='primary'
                       />
                     }
@@ -142,7 +153,7 @@ const ComponentsList = (props) => {
           </Grid>
         </RadioGroup>
       </FormControl>
-    </React.Fragment>
+    </Grid>
   );
 };
 

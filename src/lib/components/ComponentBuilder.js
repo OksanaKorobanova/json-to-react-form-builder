@@ -1,29 +1,27 @@
 import React from 'react';
 import RadioGroupBlock from './blockTypes/RadioGroupBlock';
 import ComponentsList from './blockTypes/ComponentsList';
+import SelectBlock from './blockTypes/SelectBlock';
 
-const Components = {
+const components = {
   'radio-group': RadioGroupBlock,
   list: ComponentsList,
   // check: Bar,
   // text: Bar,
   // number: Bar,
+  select: SelectBlock,
 };
 
-export default (block, state, handleChangeState, handleChangeStateEvent) => {
+export default (block) => {
   // component does exist
-  if (typeof Components[block.component] !== 'undefined') {
-    return React.createElement(Components[block.component], {
-      property: block.attributes.name,
+  if (typeof components[block.component] !== 'undefined') {
+    return React.createElement(components[block.component], {
       block: block,
-      state: state,
-      handleChangeState: handleChangeState,
-      handleChangeStateEvent: handleChangeStateEvent,
     });
   }
+
   // component doesn't exist yet
-  return React.createElement(
-    () => <div>The component {block.component} has not been created yet.</div>,
-    { property: block.attributes.name }
-  );
+  return React.createElement(() => (
+    <div>The component {block.component} has not been created yet.</div>
+  ));
 };

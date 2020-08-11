@@ -1,80 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import Layout from './Layout';
+import MainProvider from './context/MainContext';
 import { makeStyles } from '@material-ui/core/styles';
-import { CssBaseline, Button } from '@material-ui/core';
-import ComponentBuilder from './ComponentBuilder';
-const useStyles = makeStyles((theme) => ({}));
+import { CssBaseline } from '@material-ui/core';
+
+const useStyles = makeStyles((theme) => ({
+  btnContainer: {
+    display: 'flex',
+    justifyContent: 'flex-end',
+    marginTop: theme.spacing(1.5),
+  },
+}));
 
 const JsonToReactFormBuilder = (props) => {
   const classes = useStyles();
-  const [jsonFile, setJsonFile] = useState();
-  const [state, setState] = useState();
-  const [validation, setValidation] = useState();
-  // change state
-  const handleChangeState = (property, newValue) => {
-    setState({
-      ...state,
-      [property]: newValue,
-    });
-  };
-
-  const handleChangeStateEvent = (property) => (event) => {
-    if (state[property] !== event.target.value) {
-      setState({
-        ...state,
-        [property]: event.target.value,
-      });
-    }
-  };
-  useEffect(() => {
-    const newObj = props.jsonFile
-      ? JSON.parse(JSON.stringify(props.jsonFile))
-      : '';
-    if (newObj) {
-      setJsonFile(newObj);
-      if (props.state) {
-        setState(props.state)
-      } else {
-        let tempState = {};
-        newObj.map(
-          (block) => (tempState[block.attributes.name] = block.content[0].value)
-        );
-        setState(tempState);
-        setValidation(tempState);
-      }
-    }
-  }, [props.jsonFile]);
-
-  useEffect(() => {
-    console.log('state changed!');
-    console.log(state);
-  }, [state]);
-
-  useEffect(() => {
-    console.log('validation changed!');
-    console.log(validation);
-  }, [validation]);
-
   return (
-    <React.Fragment>
+    <div className={classes.root}>
       <CssBaseline />
-      <form className={classes.root}>
-        {jsonFile
-          ? jsonFile.map((block, index) => {
-              return (
-                <div key={index}>
-                  {ComponentBuilder(
-                    block,
-                    state,
-                    handleChangeState,
-                    handleChangeStateEvent
-                  )}
-                </div>
-              );
-            })
-          : ''}
-        <Button onClick={props.onSubmit}>{props.action}</Button>
-      </form>
-    </React.Fragment>
+      <MainProvider>
+        <Layout
+          jsonFile={props.jsonFile}
+          onSubmit={props.onSubmit}
+          onCancel={props.onCancel}
+          action={props.action}
+          configStyles={props.configStyles}
+          configGrid={props.configGrid}
+        />
+      </MainProvider>
+    </div>
   );
 };
 

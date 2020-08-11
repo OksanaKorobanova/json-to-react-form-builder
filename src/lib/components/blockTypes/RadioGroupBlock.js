@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   FormControl,
@@ -7,7 +7,9 @@ import {
   FormControlLabel,
   Radio,
   Typography,
+  Grid,
 } from '@material-ui/core';
+import { MainContext } from '../context/MainContext';
 
 const useStyles = makeStyles((theme) => ({
   infoBlock: {
@@ -54,6 +56,9 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'space-between',
     alignItems: 'center',
   },
+  formLabelRoot: {
+    textTransform: 'capitalize',
+  },
 }));
 
 const CustomTitle = (props) => {
@@ -67,42 +72,55 @@ const CustomTitle = (props) => {
 const RadioGroupBlock = (props) => {
   const classes = useStyles();
 
-  // useEffect(() => {
-  //   console.log('here');
-  //   console.log(props.property);
-  //   console.log(props.block.content[0].value);
-  //   props.handleChangeState(props.property, props.block.content[0].value);
-  // }, []);
+  const { block } = props;
+  const {
+    state,
+    handleChangeStateEvent,
+    configStyles,
+    configGrid,
+  } = useContext(MainContext);
 
   return (
-    <FormControl
-      variant='outlined'
-      component='fieldset'
-      className={classes.domainRadioGroup}>
-      <FormLabel component='legend'>{props.block.attributes.title}</FormLabel>
-      <RadioGroup
-        name='commercialType'
-        className={classes.radioGroup}
-        value={props.state[props.property]}>
-        {props.block.content.map((item, index) => {
-          return (
-            <FormControlLabel
-              key={index}
-              value={item.value}
-              control={
-                <Radio
-                  onClick={props.handleChangeStateEvent(props.property)}
-                  color='primary'
-                />
-              }
-              label={
-                <CustomTitle title={item.title} subtitle={item.subtitle} />
-              }
-            />
-          );
-        })}
-      </RadioGroup>
-    </FormControl>
+    <Grid
+      item={true}
+      xs={configGrid[block.attributes.name].container.xs}
+      md={configGrid[block.attributes.name].container.md}
+      style={
+        block.attributes.order
+          ? { order: block.attributes.order }
+          : { order: 'inherit' }
+      }>
+      <FormControl
+        variant='outlined'
+        component='fieldset'
+        className={classes.domainRadioGroup}>
+        <FormLabel component='legend' className={classes.formLabelRoot}>
+          {block.attributes.title}
+        </FormLabel>
+        <RadioGroup
+          name='commercialType'
+          className={classes.radioGroup}
+          value={state[block.attributes.name]}>
+          {block.content.map((item, index) => {
+            return (
+              <FormControlLabel
+                key={index}
+                value={item.value}
+                control={
+                  <Radio
+                    onClick={handleChangeStateEvent(block.attributes.name)}
+                    color='primary'
+                  />
+                }
+                label={
+                  <CustomTitle title={item.title} subtitle={item.subtitle} />
+                }
+              />
+            );
+          })}
+        </RadioGroup>
+      </FormControl>
+    </Grid>
   );
 };
 
