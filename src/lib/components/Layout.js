@@ -8,9 +8,11 @@ import { MainContext } from './context/MainContext';
 const useStyles = makeStyles((theme) => ({
   btnContainer: {
     display: 'flex',
-    justifyContent: 'flex-end',
     marginTop: theme.spacing(1.5),
   },
+  cancelBtn: {
+    marginRight: theme.spacing(1)
+  }
 }));
 
 const Layout = (props) => {
@@ -59,16 +61,19 @@ const Layout = (props) => {
   }, [validation]);
 
   const checkErrors = () => {
-    Object.keys(state).map(function (key) {
+    let result = true;
+    Object.keys(state).map((key) => {
+      console.log(key);
       if (!state[key]) {
-        return false;
+        console.log(key);
+        result = false;
       }
-      return true;
     });
+    return result;
   };
   const handleSave = () => {
-    let hasNoErrors = checkErrors();
-    if (hasNoErrors) {
+    if (checkErrors()) {
+      console.log('hasNoErrors');
       props.onSubmit ? props.onSubmit(state) : console.log('onSubmit');
     }
   };
@@ -86,15 +91,22 @@ const Layout = (props) => {
           : ''}
       </Grid>
 
-      {props.action ? (
-        <div className={classes.btnContainer}>
+      <div className={classes.btnContainer} style={props.configStyles && props.configStyles.btnContainer? props.configStyles.btnContainer : {justifyContent: 'flex-end'}}>
+        {props.onCancel ? (
+          <Button className={classes.cancelBtn} variant='contained' color='primary' onClick={props.onCancel}>
+            {props.actionCancel}
+          </Button>
+        ) : (
+          ''
+        )}
+        {props.onSubmit ? (
           <Button variant='contained' color='primary' onClick={handleSave}>
             {props.action}
           </Button>
-        </div>
-      ) : (
-        ''
-      )}
+        ) : (
+          ''
+        )}
+      </div>
     </form>
   );
 };

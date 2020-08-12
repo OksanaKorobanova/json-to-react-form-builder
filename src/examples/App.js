@@ -9,30 +9,33 @@ function App() {
     console.log('canceled');
   };
   const configStyles = {
-    domain: {
-      background: 'red',
+    btnContainer: {
+      justifyContent: 'center',
     },
   };
   const configGrid = {
-    domain: {
+    template: {
       container: {
         xs: 12,
-        md: 6,
+        sm: 12,
+        md: 12,
       },
       item: {
         xs: 12,
+        sm: 12,
         md: 6,
       },
     },
   };
   return (
     <JsonToReactFormBuilder
-      jsonFile={file}
-      onSubmit={onSubmit}
-      onCancel={onCancel}
-      action={'save'}
-      configStyles={configStyles}
-      configGrid={configGrid}
+    jsonFile={file}
+    onSubmit={onSubmit}
+    onCancel={onCancel}
+    actionCancel={'cancel'}
+    action={'save'}
+    configStyles={configStyles}
+    configGrid={configGrid}
     />
   );
 }

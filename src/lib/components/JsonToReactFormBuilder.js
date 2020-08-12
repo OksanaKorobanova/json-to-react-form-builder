@@ -23,6 +23,7 @@ const JsonToReactFormBuilder = (props) => {
           onSubmit={props.onSubmit}
           onCancel={props.onCancel}
           action={props.action}
+          actionCancel={props.actionCancel}
           configStyles={props.configStyles}
           configGrid={props.configGrid}
         />

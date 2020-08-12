@@ -25,8 +25,8 @@ const SelectBlock = (props) => {
   return (
     <Grid
       item={true}
-      xs={block.attributes.xs ? block.attributes.xs : 12}
-      md={block.attributes.md ? block.attributes.md : 12}
+      xs={configGrid[block.attributes.name]? configGrid[block.attributes.name].container.xs: 12}
+      md={configGrid[block.attributes.name]? configGrid[block.attributes.name].container.md: 12}
       style={
         block.attributes.order
           ? { order: block.attributes.order }

@@ -114,8 +114,16 @@ const ComponentsList = (props) => {
   return (
     <Grid
       item={true}
-      xs={block.attributes.xs ? block.attributes.xs : 12}
-      md={block.attributes.md ? block.attributes.md : 12}
+      xs={
+        configGrid[block.attributes.name]
+          ? configGrid[block.attributes.name].container.xs
+          : 12
+      }
+      md={
+        configGrid[block.attributes.name]
+          ? configGrid[block.attributes.name].container.md
+          : 12
+      }
       style={
         block.attributes.order
           ? { order: block.attributes.order }
@@ -135,7 +143,24 @@ const ComponentsList = (props) => {
           <Grid container className={classes.customTemplate}>
             {block.content.map((item, index) => {
               return (
-                <Grid key={index} item xs={12} sm={6} md={3}>
+                <Grid
+                  key={index}
+                  item
+                  xs={
+                    configGrid[block.attributes.name]
+                      ? configGrid[block.attributes.name].item.xs
+                      : 12
+                  }
+                  sm={
+                    configGrid[block.attributes.name]
+                      ? configGrid[block.attributes.name].item.sm
+                      : 12
+                  }
+                  md={
+                    configGrid[block.attributes.name]
+                      ? configGrid[block.attributes.name].item.md
+                      : 3
+                  }>
                   <FormControlLabel
                     key={index}
                     value={item.value}

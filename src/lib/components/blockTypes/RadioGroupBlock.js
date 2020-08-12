@@ -83,8 +83,8 @@ const RadioGroupBlock = (props) => {
   return (
     <Grid
       item={true}
-      xs={configGrid[block.attributes.name].container.xs}
-      md={configGrid[block.attributes.name].container.md}
+      xs={configGrid[block.attributes.name]? configGrid[block.attributes.name].container.xs : 12}
+      md={configGrid[block.attributes.name]? configGrid[block.attributes.name].container.md : 12}
       style={
         block.attributes.order
           ? { order: block.attributes.order }

@@ -58,7 +58,7 @@
 	{
 		"component": "select",
 		"attributes": {
-			"required": true,		
+			"required": true,
 			"title": "Select color scheme",
 			"name": "colorScheme",
 			"xs": 12,
@@ -71,22 +71,6 @@
 			},
 			{
 				"value": "dark"
-			}
-		]
-	},
-	{
-		"component": "button",
-		"attributes": {
-			"required": true,		
-			"title": "Select color scheme",
-			"name": "colorScheme",
-			"xs": 12,
-			"md": 12,
-			"oder": 0
-		},
-		"content": [
-			{
-				"value": "default"
 			}
 		]
 	}
